@@ -2,7 +2,7 @@
 
 # SocioBoard GIT settings
 socioboard_git_repo: 'https://github.com/vaughngx4/Socioboard-5.0.git'
-socioboard_git_version: 'development'
+socioboard_git_version: 'master'
 
 # Architecture the Docker image should be built for 
 socioboard_architecture: 'amd64'
