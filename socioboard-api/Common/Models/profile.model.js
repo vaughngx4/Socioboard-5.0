@@ -21,7 +21,7 @@ class ProfileModel {
 
     return new Promise((resolve, reject) => {
       if (!code) {
-        reject(new Error('Code is Invlaid'));
+        reject(new Error('Code is invalid'));
       } else {
          let redirecturl = "";
          if(invite == 1 ? redirecturl = config.get('profile_page_invite_redirect_url') : redirecturl = config.get('profile_page_redirect_url') )
@@ -29,7 +29,7 @@ class ProfileModel {
           .getOwnFacebookPages(code, redirecturl)
           .then(pageDetails => {
             if (!pageDetails) {
-              throw new Error('Cant able to fetch page details');
+              throw new Error('Unable to fetch page details');
             } else {
               pageDetails.forEach(page => {
                 const pageObject = {
@@ -76,7 +76,7 @@ class ProfileModel {
 
     return new Promise((resolve, reject) => {
       if (!code) {
-        reject(new Error('Code is Invlaid'));
+        reject(new Error('Code is invalid'));
       } else {
         // Fetching Facebook groups from facebook with auth code
         this.facebookHelper
@@ -107,7 +107,7 @@ class ProfileModel {
                 attributes: ['account_id', 'social_id'],
               });
             }
-            throw new Error('Cant able to fetch group information');
+            throw new Error('Unable to fetch group information');
           })
           .then(matchedGroups => {
             matchedGroups.forEach(page => {
@@ -131,7 +131,7 @@ class ProfileModel {
     const companyIds = [];
     return new Promise((resolve, reject) => {
       if (!code) {
-        reject(new Error('Code is Invalid'));
+        reject(new Error('Code is invalid'));
       } else {
         // Fetching linkedin company profile details using auth code
          let redirecturl = "";
@@ -173,7 +173,7 @@ class ProfileModel {
               });
             }
             throw new Error(
-              'Currently No LinkedIn Pages Found For This Account'
+              'No LinkedIn pages found for this account'
             );
           })
           .then(matchedPages => {
@@ -270,7 +270,7 @@ class ProfileModel {
             }
           })
           .catch(error => {
-            logger.error('getYoutubeChannels: Error in fetching Youtube Data');
+            logger.error('getYoutubeChannels: Error fetching YouTube data');
             reject(error);
           });
       }
@@ -372,13 +372,13 @@ class ProfileModel {
                       })
                     ).catch(error => {
                       logger.info(
-                        `Error on fetching insta profiles by fb pages. Message: ${error}`
+                        `Error fetching insta profiles by fb pages. Message: ${error}`
                       );
                     });
                   })
                   .catch(error => {
                     logger.info(
-                      `Error on fetching insta profiles by fb pages.Message: ${error}`
+                      `Error fetching insta profiles by fb pages. Message: ${error}`
                     );
                   });
               })
@@ -401,7 +401,7 @@ class ProfileModel {
           })
           .catch(error => {
             logger.info(
-              `Error on fetching insta profiles by fb pages.Message: ${error}`
+              `Error fetching insta profiles by fb pages. Message: ${error}`
             );
             reject(error);
           });
