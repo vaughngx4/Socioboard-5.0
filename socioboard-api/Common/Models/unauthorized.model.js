@@ -834,11 +834,13 @@ class userLibs {
       }
     );
     //update in Amember as well
-    let aMemberData = {
-      password: newPassword,
-      userName,
-    };
-    new aMember(config.get('aMember')).updateUserPasswordToAMember(aMemberData);
+    if(config.get('aMember_enabled') === 'true'){
+      let aMemberData = {
+        password: newPassword,
+        userName,
+      };
+      new aMember(config.get('aMember')).updateUserPasswordToAMember(aMemberData);
+    }
     return res;
   }
 
@@ -1299,11 +1301,13 @@ class userLibs {
     });
     logger.info(`AppSumo result ${JSON.stringify(res)} user_name ${user_name}`);
     if (res) {
-      await new aMember(config.get('aMember')).setAMemberPlanForAppSumoUser(
-        user_name,
-        res.plan_id,
-        res.action === 'refund' ? true : false
-      );
+      if(config.get('aMember_enabled') === 'true'){
+        await new aMember(config.get('aMember')).setAMemberPlanForAppSumoUser(
+          user_name,
+          res.plan_id,
+          res.action === 'refund' ? true : false
+        );
+      }
     }
   }
 }

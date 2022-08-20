@@ -111,4 +111,5 @@ docker/nginx/ssl/key.pem
 # Ansible development files
 ansible/inventory.yml
 ansible/roles/socio-env/files/docker.env
+ansible/roles/socio-env/files/docker-compose.yaml
 ansible/vars/config.yml

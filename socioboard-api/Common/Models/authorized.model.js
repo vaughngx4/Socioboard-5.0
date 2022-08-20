@@ -35,11 +35,13 @@ class AuthorizeLibs {
       }
     );
     //update in Amember as well
-    let aMemberData = {
-      password: newPassword,
-      userName,
-    };
-    new aMember(config.get('aMember')).updateUserPasswordToAMember(aMemberData);
+    if(config.get('aMember_enabled') === 'true'){
+      let aMemberData = {
+        password: newPassword,
+        userName,
+      };
+      new aMember(config.get('aMember')).updateUserPasswordToAMember(aMemberData);
+    }
     return res;
   }
 
@@ -260,23 +262,25 @@ class AuthorizeLibs {
         {where: {user_id: userId}}
       );
       // Update User Email  in aMember as well
-      if (profileDetails?.email) {
-        let aMemberData = {
-          email: profileDetails?.email,
-          userName,
-        };
-        new aMember(config.get('aMember')).updateUserEmailToAMember(
-          aMemberData
-        );
-      }
-      if (profileDetails?.phoneNo || profileDetails?.phoneCode) {
-        let aMemberData = {
-          userName,
-          phoneNo: `${profileDetails?.phoneCode}${profileDetails?.phoneNo}`,
-        };
-        new aMember(config.get('aMember')).updateUserPhoneToAMember(
-          aMemberData
-        );
+      if(config.get('aMember_enabled') === 'true'){
+        if (profileDetails?.email) {
+          let aMemberData = {
+            email: profileDetails?.email,
+            userName,
+          };
+          new aMember(config.get('aMember')).updateUserEmailToAMember(
+            aMemberData
+          );
+        }
+        if (profileDetails?.phoneNo || profileDetails?.phoneCode) {
+          let aMemberData = {
+            userName,
+            phoneNo: `${profileDetails?.phoneCode}${profileDetails?.phoneNo}`,
+          };
+          new aMember(config.get('aMember')).updateUserPhoneToAMember(
+            aMemberData
+          );
+        }
       }
       return res;
     } catch (error) {

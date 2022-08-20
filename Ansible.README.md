@@ -38,6 +38,11 @@ Run the playbook with `setup-all` tag to do a full deployment
 cd ansible
 ansible-playbook -b -K socioboard-deploy.yml --tags=setup-all
 ```
+Add the `compose` tag to use a custom `docker-compose.yaml`(needs to be present in `ansible/roles/socio-env/files/`)
+```bash
+cd ansible
+ansible-playbook -b -K socioboard-deploy.yml --tags=setup-all,compose
+```
 
 Run the playbook with `setup` tag to do a basic deployment:
 ```bash
